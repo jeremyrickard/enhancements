@@ -17,9 +17,6 @@ limitations under the License.
 package main
 
 import (
-	"errors"
-	"fmt"
-
 	"github.com/spf13/cobra"
 	"k8s.io/enhancements/pkg/kepctl"
 )
@@ -65,29 +62,23 @@ func buildCreateKEPCommand(k *kepctl.Client) *cobra.Command {
 }
 
 func buildCreateReceiptCommand(k *kepctl.Client) *cobra.Command {
-	opts := struct {
-		Release string
-		Stage   string
-	}{}
+	opts := kepctl.PromoteOpts{}
 	cmd := &cobra.Command{
 		Use:     "receipt [KEP]",
 		Short:   "Target a KEP for a release",
 		Long:    "Target a KEP for a release",
 		Example: `  kepctl create receipt sig-architecture/000-mykep --release v1.22 --stage beta`,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
-			if len(args) == 0 {
-				return errors.New("KEP is required - ex: sig-architecture/000-mykep")
-			}
-			return nil
+			return opts.Validate(args)
 		},
 		RunE: func(cmd *cobra.Command, args []string) error {
-			fmt.Fprintf(k.Out, "this would create a new receipt in the proposed folder for release %s\n", opts.Release)
-			return nil
+			return k.Promote(opts)
 		},
 	}
 
 	f := cmd.Flags()
 	f.StringVar(&opts.Release, "release", "", "Release To Target")
 	f.StringVar(&opts.Stage, "stage", "", "Stage KEP will be promoted to")
+	addRepoPathFlag(f, &opts.CommonArgs)
 	return cmd
 }
