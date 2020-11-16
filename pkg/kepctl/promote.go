@@ -52,7 +52,12 @@ func (c *Client) Promote(opts PromoteOpts) error {
 		return fmt.Errorf("unable to write updated KEP: %s", err)
 	}
 
-	// TODO: Implement ticketing workflow artifact generation
 	fmt.Fprintf(c.Out, "KEP %s/%s updated\n", opts.SIG, opts.Name)
-	return nil
+
+	proposed := &ReleaseOpts{
+		Release: opts.Release,
+		Stage:   opts.Stage,
+	}
+	proposed.CommonArgs = opts.CommonArgs
+	return c.proposeKEP(proposed)
 }

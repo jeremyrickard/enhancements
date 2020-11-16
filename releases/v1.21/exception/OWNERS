@@ -1,0 +1,7 @@
+approvers:
+- kirsten // Enhancement Team
+- someone // Release Lead
+- someoneelse // Enhancement Team
+- someoneelse // Release Lead
+reviewers:
+- release-team

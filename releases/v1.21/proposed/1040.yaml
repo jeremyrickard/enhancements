@@ -1,0 +1,4 @@
+issue: https://github.com/kubernetes/enhancements/issues/1040
+link: https://github.com/kubernetes/enhancements/tree/master/keps/sig-api-machinery/1040-priority-and-fairness
+sig: sig-api-machinery
+stage: stable

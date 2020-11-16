@@ -50,7 +50,7 @@ type CommonArgs struct {
 
 func (c *CommonArgs) validateAndPopulateKEP(args []string) error {
 	if len(args) == 0 {
-		return fmt.Errorf("must provide a path for the new KEP like sig-architecture/0000-new-kep")
+		return fmt.Errorf("must provide a path for the KEP like sig-architecture/0000-new-kep")
 	}
 	if len(args) == 1 {
 		kep := args[0]
@@ -200,7 +200,7 @@ func findLocalKEPMeta(repoPath, sig string) ([]string, error) {
 	return keps, err
 }
 
-func (c *Client) loadLocalKEPs(repoPath, sig string) ([]*keps.Proposal) {
+func (c *Client) loadLocalKEPs(repoPath, sig string) []*keps.Proposal {
 	// KEPs in the local filesystem
 	files, err := findLocalKEPMeta(repoPath, sig)
 	if err != nil {

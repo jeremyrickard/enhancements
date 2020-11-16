@@ -3,6 +3,7 @@ module k8s.io/enhancements
 go 1.12
 
 require (
+	github.com/Masterminds/semver v1.5.0
 	github.com/google/go-github/v32 v32.1.0
 	github.com/olekukonko/tablewriter v0.0.4
 	github.com/pkg/errors v0.9.1

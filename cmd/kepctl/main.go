@@ -50,5 +50,6 @@ func buildMainCommand() (*cobra.Command, error) {
 	rootCmd.AddCommand(buildCreateCommand(k))
 	rootCmd.AddCommand(buildPromoteCommand(k))
 	rootCmd.AddCommand(buildQueryCommand(k))
+	rootCmd.AddCommand(buildReleaseCommand(k))
 	return rootCmd, nil
 }
